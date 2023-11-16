@@ -93,7 +93,7 @@ const Wallet = () => {
 
       console.log("signature", signature);
 
-      const result = await axios.post("http://localhost:4000/submitSig", {
+      const result = await axios.post("https://zero-project-production.up.railway.app/submitSig", {
         from: fromAddress, // from
         to: txData.address, // to
         amount: txData.amount,
@@ -110,7 +110,7 @@ const Wallet = () => {
 
   const getFunds = async () => {
     console.log("get funds");
-    const result = await axios.put("http://localhost:4000/getFunds", {
+    const result = await axios.put("https://zero-project-production.up.railway.app/getFunds", {
       recipient: accountAddress,
       amount: web3.utils.toWei("100", "ether"),
     });

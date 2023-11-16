@@ -19,7 +19,6 @@ const Wallet = () => {
 
   const { ethereum } = window;
 
-
   const connectWallet = async () => {
     console.clear();
     const { ethereum } = window;
@@ -50,7 +49,6 @@ const Wallet = () => {
       from: fromAddress,
     });
     console.log("nonce", Number(nonce), nonce);
-
 
     try {
       const DomainSeparator = ethers.keccak256(
@@ -93,12 +91,15 @@ const Wallet = () => {
 
       console.log("signature", signature);
 
-      const result = await axios.post("https://zero-project-production.up.railway.app/submitSig", {
-        from: fromAddress, // from
-        to: txData.address, // to
-        amount: txData.amount,
-        signature,
-      });
+      const result = await axios.post(
+        "https://zero-project-production.up.railway.app/submitSig",
+        {
+          from: fromAddress, // from
+          to: txData.address, // to
+          amount: txData.amount,
+          signature,
+        }
+      );
       console.log("result", result.data.hash);
       setTxHash(result.data.hash);
     } catch (error) {
@@ -107,16 +108,27 @@ const Wallet = () => {
     }
   }
 
-
   const getFunds = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer YourAccessToken", // Add any other headers as needed
+    };
+
     console.log("get funds");
-    const result = await axios.put("https://zero-project-production.up.railway.app/getFunds", {
+    const data = {
       recipient: accountAddress,
       amount: web3.utils.toWei("100", "ether"),
-    });
-    console.log('result', result);
-  };
+    };
 
+    const result = await axios.put(
+      "https://zero-project-production.up.railway.app/getFunds",
+      {
+        headers,
+        data,
+      }
+    );
+    console.log("result", result);
+  };
 
   return (
     <div style={{ paddingLeft: "1rem", paddingTop: "1rem" }}>

@@ -112,7 +112,6 @@ const Wallet = () => {
     console.log('headers')
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer YourAccessToken", // Add any other headers as needed
     };
 
     console.log("get funds");

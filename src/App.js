@@ -24,7 +24,7 @@ const Wallet = () => {
     console.clear();
     const { ethereum } = window;
     if (!ethereum) {
-      sethaveMetamask(false);
+      // sethaveMetamask(false);
     }
 
     const accounts = await ethereum.request({
